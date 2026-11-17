@@ -1,0 +1,707 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<script>document.documentElement.className = "js";</script>
+<title>Bertemu Santa · I-Thon Mart</title>
+<meta name="description" content="Meriahkan Natal dengan membeli hadiah untuk si kecil di I-Thon Mart, lalu Santa yang menyerahkannya di hari acara. 21–23 Desember 2026 di I-Thon Mart Mumbul, Kampial & Ungasan.">
+<meta name="theme-color" content="#8a0c21">
+
+<!-- Preview link di WhatsApp/Facebook.
+     og:url & og:image HARUS pakai URL web yang lagi live (lengkap, https://...).
+     Kalau URL web beda/berubah, ganti dua baris di bawah ini. -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://santa-ithonmart.pages.dev/">
+<meta property="og:title" content="Bertemu Santa · I-Thon Mart">
+<meta property="og:description" content="Beli hadiah untuk si kecil di I-Thon Mart, Santa yang menyerahkannya. 21–23 Desember 2026 di Mumbul, Kampial & Ungasan.">
+<meta property="og:image" content="https://santa-ithonmart.pages.dev/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" type="image/png" href="img/favicon.png">
+<link rel="apple-touch-icon" href="img/favicon.png">
+<link rel="preload" href="fonts/jakarta-wght.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/newsreader-700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="img/santa.webp" as="image">
+
+<style>
+@font-face{font-family:"Plus Jakarta Sans";src:url(fonts/jakarta-wght.woff2) format("woff2");font-weight:200 800;font-display:swap}
+@font-face{font-family:"Newsreader";src:url(fonts/newsreader-600.woff2) format("woff2");font-weight:600;font-display:swap}
+@font-face{font-family:"Newsreader";src:url(fonts/newsreader-700.woff2) format("woff2");font-weight:700;font-display:swap}
+
+:root{
+  --cardinal:#c21730;      /* aksen utama */
+  --cardinal-ink:#9e0f24;  /* teks merah di atas putih */
+  --mulled:#6e0818;        /* merah paling gelap */
+  --frost:#f4f4f6;         /* wadah list */
+  --ink:#1c1c1e;
+  --graphite:#6c6c70;
+  --hair:rgba(60,60,67,.16);
+  --pine:#1e7a46;
+  --tinsel:#f3c35b;
+  --serif:"Newsreader", "New York", Georgia, serif;
+  --sans:"Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --ease:cubic-bezier(.2,.7,.2,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;background:#3a0611}
+body{font-family:var(--sans);font-size:16px;line-height:1.5;color:var(--ink);-webkit-font-smoothing:antialiased;
+  background:radial-gradient(110% 70% at 50% 0%, #7a0b1e 0%, #3a0611 70%) fixed;
+}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit}
+button{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--tinsel);outline-offset:2px;border-radius:8px}
+.ic{width:20px;height:20px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.nw{white-space:nowrap}
+.app{max-width:520px;margin:0 auto;background:#fff;min-height:100vh;position:relative;overflow:hidden;box-shadow:0 0 80px rgba(0,0,0,.4)}
+
+/* ---------- HERO (satu-satunya bagian merah, ala halaman buku) ---------- */
+.hero{position:relative;isolation:isolate;color:#fff;text-align:center;padding:0 20px 56px;
+  background:radial-gradient(120% 70% at 50% 18%, #d9263a 0%, #b3132b 42%, #8a0c21 76%, var(--mulled) 100%)}
+.hero::before,.footer::before{content:"";position:absolute;inset:0;z-index:-2;background:url(img/bg.webp) center/cover;opacity:.32;mix-blend-mode:screen;pointer-events:none}
+.garland{position:absolute;top:0;left:50%;width:150%;transform:translateX(-50%);z-index:-1;pointer-events:none}
+.topbar{display:flex;justify-content:space-between;align-items:center;padding-top:14px}
+.logo-chip{display:inline-flex;background:#fff;border-radius:12px;padding:6px 10px;box-shadow:0 6px 18px -8px rgba(0,0,0,.55)}
+.logo-chip img{height:30px;width:auto}
+.seg{position:relative;display:inline-flex;padding:3px;border-radius:999px;background:rgba(70,6,18,.42);box-shadow:inset 0 0 0 1px rgba(255,255,255,.28), 0 6px 18px -8px rgba(0,0,0,.5);-webkit-backdrop-filter:blur(16px) saturate(150%);backdrop-filter:blur(16px) saturate(150%)}
+.seg button{position:relative;z-index:1;width:46px;height:32px;border:0;background:none;color:#fff;font-weight:700;font-size:13.5px;border-radius:999px;cursor:pointer;transition:color .25s}
+.seg button[aria-pressed="true"]{color:var(--cardinal-ink)}
+.seg-thumb{position:absolute;top:3px;left:3px;width:46px;height:32px;border-radius:999px;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.2);transition:transform .38s var(--ease)}
+.seg[data-lang="en"] .seg-thumb{transform:translateX(46px)}
+
+.cover{position:relative;width:min(60%,246px);margin:30px auto 0}
+.santa{width:100%;filter:drop-shadow(0 22px 26px rgba(50,0,10,.45));animation:float 6s ease-in-out infinite}
+.badge15{position:absolute;right:-24%;top:2%;width:44%;transform:rotate(8deg);animation:wiggle 4.5s ease-in-out infinite;filter:drop-shadow(0 8px 10px rgba(50,0,10,.35))}
+@keyframes float{50%{transform:translateY(-7px)}}
+@keyframes wiggle{0%,100%{transform:rotate(7deg)}50%{transform:rotate(11deg) translateY(-4px)}}
+.fine{display:inline-block;margin-top:12px;font-size:12.5px;line-height:1.4;color:rgba(255,255,255,.8);text-decoration:underline;text-decoration-color:rgba(255,255,255,.35);text-underline-offset:3px}
+.title{font-family:var(--serif);font-weight:700;font-size:clamp(42px,12.5vw,54px);line-height:1.02;letter-spacing:-.012em;margin:16px 0 12px}
+.lead{font-size:17px;line-height:1.5;color:rgba(255,255,255,.93);max-width:31ch;margin:0 auto}
+
+.glass{background:rgba(255,255,255,.12);box-shadow:inset 0 0 0 1px rgba(255,255,255,.2);-webkit-backdrop-filter:blur(20px) saturate(150%);backdrop-filter:blur(20px) saturate(150%);border-radius:22px}
+.info{margin:24px auto 0;max-width:420px;text-align:left;padding:4px 16px 16px}
+.info-row{display:grid;grid-template-columns:22px 1fr;gap:12px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.15)}
+.info-row .ic{margin-top:1px;opacity:.85}
+.info-k{display:block;font-size:13px;color:rgba(255,255,255,.72)}
+.info-v{display:block;font-size:15.5px;font-weight:600;line-height:1.4}
+.status{display:inline-flex;align-items:center;gap:6px;margin-top:7px;font-size:12.5px;font-weight:700;padding:3px 10px;border-radius:999px;background:var(--tinsel);color:#3d2900}
+.status.muted{background:rgba(255,255,255,.2);color:#fff}
+.info-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+
+.pill{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:46px;padding:0 18px;border-radius:999px;font-weight:700;font-size:15px;line-height:1;text-decoration:none;border:0;cursor:pointer;-webkit-tap-highlight-color:transparent;
+  transition:transform .18s var(--ease), box-shadow .2s, background-color .2s}
+.pill:active{transform:scale(.96)}
+.pill-white{background:#fff;color:var(--cardinal-ink);box-shadow:0 8px 18px -10px rgba(0,0,0,.5)}
+.pill-glass{background:rgba(255,255,255,.15);color:#fff;box-shadow:inset 0 0 0 1px rgba(255,255,255,.28)}
+@media (hover:hover){
+  .pill-white:hover{transform:translateY(-1px);box-shadow:0 12px 22px -10px rgba(0,0,0,.55)}
+  .pill-glass:hover{background:rgba(255,255,255,.24)}
+}
+
+.count{margin:12px auto 0;max-width:420px;padding:16px 14px 14px}
+.count-label{font-size:15px;font-weight:600;line-height:1.4;color:rgba(255,255,255,.94)}
+.count-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px}
+.count-grid div{background:rgba(255,255,255,.96);border-radius:14px;padding:10px 0 8px}
+.count-grid b{display:block;font-size:26px;font-weight:700;line-height:1.1;color:var(--ink);font-variant-numeric:tabular-nums}
+.count-grid span{display:block;font-size:12px;color:var(--graphite);margin-top:2px}
+
+/* ---------- KONTEN (lembar putih) ---------- */
+.sheet{position:relative;z-index:2;margin-top:-28px;background:#fff;border-radius:28px 28px 0 0;padding:4px 0 30px}
+.sec{padding:30px 20px 6px;scroll-margin-top:10px}
+.sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:14px;margin-bottom:16px}
+.sec-head h2{font-family:var(--serif);font-weight:600;font-size:28px;line-height:1.15;letter-spacing:-.005em}
+.sec-head p{font-size:15.5px;color:var(--graphite);margin-top:6px;max-width:44ch}
+.sec-art{width:54px;flex:none;margin-bottom:2px}
+.group{background:var(--frost);border-radius:20px;overflow:hidden}
+
+/* jadwal: tanggal model kalender meja (bulan / tanggal / hari) */
+.ev{position:relative;display:grid;grid-template-columns:82px 1fr;column-gap:14px;align-items:start;padding:16px 14px;transition:opacity .3s}
+.ev + .ev::before{content:"";position:absolute;top:0;left:14px;right:14px;height:1px;background:var(--hair)}
+.cal{width:82px;border-radius:14px;overflow:hidden;background:#fff;text-align:center;
+  box-shadow:0 1px 2px rgba(0,0,0,.06), 0 10px 18px -14px rgba(90,10,25,.6)}
+.cal span{display:block;white-space:nowrap}
+.cal-mon{padding:4px 2px 3px;font-size:11.5px;font-weight:700;line-height:1.3;color:#fff;background:linear-gradient(170deg,#d11f35,#8a0c21)}
+.cal-num{padding-top:8px;font-family:var(--serif);font-weight:700;font-size:32px;line-height:1;color:var(--ink)}
+.cal-day{padding:3px 2px 9px;font-size:12px;font-weight:600;line-height:1.3;color:var(--graphite)}
+.ev h3{font-size:16.5px;font-weight:700;line-height:1.3}
+.ev-sub{font-size:14.5px;margin-top:2px}
+.ev-addr{font-size:13.5px;line-height:1.45;color:var(--graphite);margin-top:3px}
+.ev-actions{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
+.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap}
+.pill-sm{min-height:36px;padding:0 14px;font-size:14px;gap:6px;background:#fff;color:var(--cardinal-ink);box-shadow:0 1px 2px rgba(0,0,0,.08)}
+.pill-sm .ic{width:16px;height:16px}
+.badge{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;padding:3px 9px;border-radius:999px;margin-bottom:6px}
+.ev.next .badge{background:#fcefcc;color:#5f4100}
+.ev.today .badge{background:var(--cardinal);color:#fff}
+.ev.live .badge{background:#dcf2e4;color:#135a31}
+.ev.done{opacity:.5}
+.ev.done .badge{background:#e5e5ea;color:#57575c}
+.dot{width:7px;height:7px;border-radius:50%;background:currentColor;animation:pulse 1.4s ease-in-out infinite}
+@keyframes pulse{50%{opacity:.25}}
+
+/* cara ikut */
+.steps{list-style:none}
+.step{position:relative;display:grid;grid-template-columns:32px 1fr;gap:14px;padding:16px 16px 16px 14px}
+.step + .step::before{content:"";position:absolute;top:0;left:60px;right:0;height:1px;background:var(--hair)}
+.num{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:var(--cardinal);color:#fff;font-weight:700;font-size:15px}
+.step h3{font-size:16.5px;font-weight:700;line-height:1.3}
+.step p{font-size:15px;color:var(--graphite);margin-top:3px}
+.who{display:flex;align-items:center;gap:14px;padding:14px 16px;margin-top:12px}
+.who img{width:50px;flex:none}
+.who h3{font-size:15.5px;font-weight:700}
+.who ul{list-style:none;font-size:14.5px;color:var(--graphite)}
+
+/* hadiah */
+.perk-big{position:relative;display:grid;grid-template-columns:1fr auto;align-items:center;gap:6px;border-radius:22px;padding:20px 16px 20px 20px;color:#fff;
+  background:radial-gradient(130% 130% at 0% 0%, #d9263a 0%, #a3112a 55%, #7a0a1d 100%)}
+.perk-big b{display:block;font-family:var(--serif);font-weight:700;font-size:56px;line-height:1}
+.perk-big p{font-size:15px;line-height:1.45;margin-top:6px;color:rgba(255,255,255,.93);max-width:24ch}
+.perk-big img{width:98px;filter:drop-shadow(0 10px 12px rgba(40,0,8,.35))}
+.perk-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.perk{background:var(--frost);border-radius:20px;padding:16px}
+.perk-ic{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:#fff;color:var(--cardinal);margin-bottom:12px}
+.perk-ic .ic{width:22px;height:22px}
+.perk h3{font-size:15.5px;font-weight:700;line-height:1.3}
+.perk p{font-size:14px;line-height:1.45;color:var(--graphite);margin-top:3px}
+
+/* S&K */
+.terms{list-style:none}
+.terms li{position:relative;padding:13px 16px 13px 34px;font-size:15px;line-height:1.55}
+.terms li::before{content:"";position:absolute;left:16px;top:22px;width:6px;height:6px;border-radius:50%;background:var(--cardinal)}
+.terms li + li::after{content:"";position:absolute;top:0;left:34px;right:0;height:1px;background:var(--hair)}
+.terms li.note{background:#fff6df;color:#463710}
+.terms li.note::before{background:#d99a12}
+
+/* kontak */
+.row{position:relative;display:grid;grid-template-columns:38px 1fr 16px;gap:12px;align-items:center;width:100%;padding:12px 14px;text-align:left;text-decoration:none;color:inherit;background:none;border:0;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:background-color .15s}
+.row + .row::before{content:"";position:absolute;top:0;left:64px;right:0;height:1px;background:var(--hair)}
+.row:active{background:rgba(0,0,0,.06)}
+@media (hover:hover){.row:hover{background:rgba(0,0,0,.035)}}
+.row-ic{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;color:#fff}
+.row-ic .ic{width:21px;height:21px}
+/* logo resmi (kalau file-nya ada di img/, lihat data.js) */
+.row-ic.has-logo{background:none!important}
+.has-logo img{width:100%;height:100%;object-fit:contain}
+.row-t{display:block;font-size:16px;font-weight:600;line-height:1.3}
+.row-s{display:block;font-size:13.5px;color:var(--graphite)}
+.chev{width:16px;height:16px;color:#b8b8bd;transition:transform .2s var(--ease)}
+@media (hover:hover){.row:hover .chev{transform:translateX(2px)}}
+
+/* footer */
+.footer{position:relative;isolation:isolate;overflow:hidden;color:#fff;text-align:center;padding:124px 24px calc(130px + env(safe-area-inset-bottom));
+  background:radial-gradient(120% 90% at 50% 100%, #c21730 0%, #8a0c21 60%, var(--mulled) 100%)}
+.footer .garland{width:150%}
+.greet{font-family:var(--serif);font-weight:600;font-size:30px;line-height:1.2}
+.copy{font-size:13px;opacity:.75;margin-top:14px}
+
+/* tab bar melayang */
+.tabbar{position:fixed;left:0;right:0;bottom:calc(12px + env(safe-area-inset-bottom));z-index:60;max-width:520px;margin:0 auto;padding:0 12px;display:flex;align-items:center;gap:10px;pointer-events:none}
+.tabs{position:relative;flex:1;display:grid;grid-template-columns:repeat(4,1fr);padding:5px;border-radius:999px;pointer-events:auto;
+  background:rgba(255,255,255,.8);-webkit-backdrop-filter:blur(20px) saturate(180%);backdrop-filter:blur(20px) saturate(180%);
+  box-shadow:0 12px 30px -10px rgba(0,0,0,.32), inset 0 0 0 1px rgba(0,0,0,.06)}
+.tab{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:2px;padding:7px 2px 6px;border-radius:999px;color:#3a3a3c;text-decoration:none;font-size:11px;font-weight:600;line-height:1.2;-webkit-tap-highlight-color:transparent;transition:color .25s}
+.tab .ic{width:22px;height:22px}
+.tab.on{color:var(--cardinal)}
+.tab:active{transform:scale(.95)}
+.tab-thumb{position:absolute;top:5px;bottom:5px;left:0;width:0;border-radius:999px;background:rgba(0,0,0,.065);opacity:0;
+  transition:transform .42s var(--ease), width .42s var(--ease), opacity .25s}
+.tab-wa{pointer-events:auto;flex:none;width:58px;height:58px;border-radius:50%;display:grid;place-items:center;background:var(--pine);color:#fff;
+  box-shadow:0 12px 26px -10px rgba(20,90,50,.7);transition:transform .18s var(--ease)}
+.tab-wa:active{transform:scale(.92)}
+.tab-wa .ic{width:26px;height:26px}
+.tab-wa.has-logo{background:#fff;box-shadow:0 12px 28px -10px rgba(0,0,0,.4), inset 0 0 0 1px rgba(0,0,0,.06)}
+.tab-wa.has-logo img{width:36px;height:36px}
+@supports not ((-webkit-backdrop-filter:blur(1px)) or (backdrop-filter:blur(1px))){
+  .tabs{background:rgba(255,255,255,.97)}
+  .glass,.seg{background:rgba(80,6,20,.55)}
+}
+@media (min-width:521px){.tabbar{padding:0 16px}}
+
+/* ---------- animasi ---------- */
+.js .ld{animation:rise .8s var(--ease) both;animation-delay:var(--d,0s)}
+.js .cover.ld{animation-name:pop}
+.js .hero > .garland{animation:drop 1s var(--ease) both}
+@keyframes rise{from{opacity:0;transform:translateY(16px)}}
+@keyframes pop{from{opacity:0;transform:scale(.9)}}
+@keyframes drop{from{opacity:0;transform:translate(-50%,-16px)}}
+.js .rv{opacity:0;transform:translateY(18px);transition:opacity .55s var(--ease), transform .55s var(--ease)}
+.js .rv.in{opacity:1;transform:none}
+.js .rv-list > *{opacity:0;transform:translateY(12px);transition:opacity .45s var(--ease), transform .45s var(--ease)}
+.js .rv-list.in > *{opacity:1;transform:none}
+.js .rv-list.in > *:nth-child(2){transition-delay:.06s}
+.js .rv-list.in > *:nth-child(3){transition-delay:.12s}
+.js .rv-list.in > *:nth-child(4){transition-delay:.18s}
+.js .rv-list.in > *:nth-child(5){transition-delay:.24s}
+.js .rv-list.in > *:nth-child(n+6){transition-delay:.3s}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .js .rv,.js .rv-list > *{opacity:1!important;transform:none!important}
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M8 3v4M16 3v4M3 10h18"/></symbol>
+  <symbol id="i-cal-plus" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M8 3v4M16 3v4M3 10h18M12 13v5M9.5 15.5h5"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></symbol>
+  <symbol id="i-store" viewBox="0 0 24 24"><path d="M4 10v10h16V10"/><path d="M3 10l2-6h14l2 6M3 10a3 3 0 0 0 6 0 3 3 0 0 0 6 0 3 3 0 0 0 6 0"/><path d="M10 20v-5h4v5"/></symbol>
+  <symbol id="i-pen" viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="m13.5 6.5 4 4"/></symbol>
+  <symbol id="i-list" viewBox="0 0 24 24"><path d="M10 6h10M10 12h10M10 18h10"/><path d="M4 5h2v3M4 11.5h2.2L4 14h2.4M4 17h2.2l-1 1.4 1 1.6H4"/></symbol>
+  <symbol id="i-gift" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="5" rx="1"/><path d="M5 13v8h14v-8M12 8v13"/><path d="M12 8S10.5 3 8 3.5 6.5 8 12 8zM12 8s1.5-5 4-4.5S17.5 8 12 8z"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 3l2.6 5.6 6.1.7-4.5 4.2 1.2 6L12 16.6 6.6 19.5l1.2-6-4.5-4.2 6.1-.7z"/></symbol>
+  <symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4M9 12h6M9 16h6"/></symbol>
+  <symbol id="i-nav" viewBox="0 0 24 24"><path d="M3 11l18-8-8 18-2-8z"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M20.5 12a8.5 8.5 0 0 1-12.4 7.6L3.5 21l1.4-4.4A8.5 8.5 0 1 1 20.5 12z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/></symbol>
+  <symbol id="i-camera" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="14" rx="4"/><circle cx="12" cy="13" r="3.5"/><path d="M8.5 6 10 4h4l1.5 2"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><circle cx="17" cy="9" r="2.5"/><path d="M16.5 14.2a5 5 0 0 1 5 4.8"/></symbol>
+  <symbol id="i-music" viewBox="0 0 24 24"><path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></symbol>
+  <symbol id="i-share" viewBox="0 0 24 24"><path d="M12 15V3M7.5 7.5 12 3l4.5 4.5"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></symbol>
+</svg>
+
+<div class="app">
+
+  <header class="hero" id="top" data-spy="">
+    <div class="garland" aria-hidden="true"><img src="img/deco-left.webp" alt="" width="1000" height="212"></div>
+
+    <div class="topbar ld" style="--d:.05s">
+      <span class="logo-chip"><img src="img/logo.webp" alt="I-Thon Mart" width="90" height="30"></span>
+      <div class="seg" id="seg" role="group" aria-label="Bahasa / Language" data-lang="id">
+        <span class="seg-thumb" aria-hidden="true"></span>
+        <button type="button" data-lang="id" aria-pressed="true" lang="id">ID</button>
+        <button type="button" data-lang="en" aria-pressed="false" lang="en">EN</button>
+      </div>
+    </div>
+
+    <div class="cover ld" style="--d:.12s">
+      <img class="santa" id="santaImg" src="img/santa.webp" alt="" width="640" height="732">
+      <img class="badge15" id="badgeImg" src="img/discount.webp" alt="" width="300" height="339">
+    </div>
+    <a class="fine ld" style="--d:.2s" href="#snk" id="fine"></a>
+
+    <h1 class="title ld" style="--d:.26s" data-i18n="h1">Bertemu Santa</h1>
+    <p class="lead ld" style="--d:.32s" data-i18n="lead">Meriahkan Natal dengan membeli hadiah untuk si kecil di I-Thon Mart.</p>
+
+    <div class="glass info ld" style="--d:.4s">
+      <div class="info-row"><svg class="ic"><use href="#i-cal"/></svg><div><span class="info-k" data-i18n="kAcara">Acara</span><span class="info-v" id="vAcara"></span></div></div>
+      <div class="info-row"><svg class="ic"><use href="#i-store"/></svg><div><span class="info-k" data-i18n="kTempat">Tempat</span><span class="info-v" id="vTempat"></span></div></div>
+      <div class="info-row"><svg class="ic"><use href="#i-pen"/></svg><div><span class="info-k" data-i18n="kDaftar">Pendaftaran</span><span class="info-v" id="vDaftar"></span><span class="status" id="regStatus"></span></div></div>
+      <div class="info-actions">
+        <a class="pill pill-white" href="#cara-ikut" data-i18n="ctaJoin">Cara ikut</a>
+        <a class="pill pill-glass" href="#jadwal" data-i18n="ctaSchedule">Lihat jadwal</a>
+      </div>
+    </div>
+
+    <div class="glass count ld" style="--d:.48s">
+      <p class="count-label" id="countLabel"></p>
+      <div class="count-grid" id="countdown" aria-hidden="true">
+        <div><b id="cdD">0</b><span data-i18n="uD">hari</span></div>
+        <div><b id="cdH">00</b><span data-i18n="uH">jam</span></div>
+        <div><b id="cdM">00</b><span data-i18n="uM">menit</span></div>
+        <div><b id="cdS">00</b><span data-i18n="uS">detik</span></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="sheet">
+    <section class="sec" id="jadwal" data-spy="jadwal">
+      <div class="sec-head rv">
+        <div><h2 data-i18n="jadwalH2">Yuk, ketemu Santa di I-Thon!</h2><p id="jadwalSub"></p></div>
+        <img class="sec-art" src="img/tree.webp" alt="" aria-hidden="true" width="140" height="220">
+      </div>
+      <div class="group rv-list" id="events"></div>
+    </section>
+
+    <section class="sec" id="cara-ikut" data-spy="cara-ikut">
+      <div class="sec-head rv">
+        <div><h2 data-i18n="caraH2">Cara ikut</h2><p data-i18n="caraSub">Daftarnya langsung di kasir, saat kamu membeli hadiah.</p></div>
+        <img class="sec-art" src="img/hat.webp" alt="" aria-hidden="true" width="220" height="136" style="transform:rotate(12deg)">
+      </div>
+      <ol class="group steps rv-list" id="steps"></ol>
+      <div class="group who rv" id="who" hidden>
+        <img src="img/deer.webp" alt="" aria-hidden="true" width="220" height="189">
+        <div><h3 data-i18n="whoH3">Siapa yang bisa ikut?</h3><ul id="whoList"></ul></div>
+      </div>
+    </section>
+
+    <section class="sec" id="hadiah" data-spy="hadiah">
+      <div class="sec-head rv">
+        <div><h2 data-i18n="hadiahH2">Diserahkan langsung oleh Santa</h2><p data-i18n="hadiahSub">Setiap anak yang terdaftar menerima hadiahnya di hari acara, langsung dari tangan Santa.</p></div>
+      </div>
+      <div class="perk-big rv">
+        <div><b>15%</b><p data-i18n="perkBig">Diskon untuk pembelian hadiah selama periode pendaftaran.</p></div>
+        <img src="img/santa-face.webp" alt="" aria-hidden="true" width="194" height="220">
+      </div>
+      <div class="perk-row rv-list">
+        <div class="perk"><span class="perk-ic"><svg class="ic"><use href="#i-gift"/></svg></span><h3 data-i18n="perkWrapT">Bungkus kado gratis</h3><p data-i18n="perkWrapP">Hadiahmu dibungkus rapi di kasir.</p></div>
+        <div class="perk"><span class="perk-ic"><svg class="ic"><use href="#i-star"/></svg></span><h3 data-i18n="perkBonusT">Ada hadiah tambahan</h3><p data-i18n="perkBonusP">Dari I-Thon Mart untuk setiap peserta.</p></div>
+      </div>
+    </section>
+
+    <section class="sec" id="snk" data-spy="snk">
+      <div class="sec-head rv"><div><h2 data-i18n="snkH2">Syarat &amp; ketentuan</h2></div></div>
+      <ul class="group terms rv-list" id="terms"></ul>
+    </section>
+
+    <section class="sec" id="kontak" data-spy="">
+      <div class="sec-head rv">
+        <div><h2 data-i18n="kontakH2">Ada pertanyaan?</h2><p data-i18n="kontakSub">Tanyakan langsung ke tim marketing kami lewat WhatsApp.</p></div>
+        <img class="sec-art" src="img/gingerbread.webp" alt="" aria-hidden="true" width="171" height="220" style="width:46px;transform:rotate(8deg)">
+      </div>
+      <div class="group rv-list" id="contact"></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="garland" aria-hidden="true"><img src="img/deco-right.webp" alt="" width="1000" height="212"></div>
+    <p class="greet">Merry Christmas &amp; Happy New Year 2027</p>
+    <p class="copy">© 2026 I-Thon Mart</p>
+  </footer>
+</div>
+
+<nav class="tabbar" aria-label="Navigasi">
+  <div class="tabs" id="tabs">
+    <span class="tab-thumb" id="tabThumb" aria-hidden="true"></span>
+    <a class="tab" href="#jadwal" data-sec="jadwal"><svg class="ic"><use href="#i-cal"/></svg><span data-i18n="tJadwal">Jadwal</span></a>
+    <a class="tab" href="#cara-ikut" data-sec="cara-ikut"><svg class="ic"><use href="#i-list"/></svg><span data-i18n="tCara">Cara ikut</span></a>
+    <a class="tab" href="#hadiah" data-sec="hadiah"><svg class="ic"><use href="#i-gift"/></svg><span data-i18n="tHadiah">Hadiah</span></a>
+    <a class="tab" href="#snk" data-sec="snk"><svg class="ic"><use href="#i-doc"/></svg><span data-i18n="tSnk">S&amp;K</span></a>
+  </div>
+  <a class="tab-wa" id="tabWa" data-logo="whatsapp" href="#" target="_blank" rel="noopener"><svg class="ic"><use href="#i-chat"/></svg></a>
+</nav>
+
+<script src="data.js"></script>
+<script>
+(function () {
+  var E = window.EVENT;
+  if (!E) return;
+
+  var H = 3600e3, D = 86400e3, OFF = 8 * H; // WITA = UTC+8
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  var NAMA = {
+    id: { hari: ["Minggu","Senin","Selasa","Rabu","Kamis","Jumat","Sabtu"],
+          bulan: ["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"] },
+    en: { hari: ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+          bulan: ["January","February","March","April","May","June","July","August","September","October","November","December"] }
+  };
+
+  var UI = {
+    id: {
+      title: "Bertemu Santa · I-Thon Mart", h1: "Bertemu Santa",
+      lead: "Meriahkan Natal dengan membeli hadiah untuk si kecil di I-Thon Mart. Titipkan di kasir, nanti Santa yang menyerahkannya di hari acara.",
+      santaAlt: "Santa melambaikan tangan sambil membawa hadiah", badgeAlt: "Diskon 15%",
+      kAcara: "Acara", kTempat: "Tempat", kDaftar: "Pendaftaran",
+      vAcara: function (r, j) { return r + ", mulai " + j; },
+      ctaJoin: "Cara ikut", ctaSchedule: "Lihat jadwal",
+      regOpens: function (d) { return "Dibuka " + d; },
+      regLeft: function (n) { return "Tutup " + n + " hari lagi"; },
+      regTomorrow: "Tutup besok", regLast: "Hari terakhir", regClosed: "Sudah ditutup",
+      countLabel: "Santa datang ke I-Thon Mart dalam",
+      countDuring: "Santa sedang berkeliling ke cabang I-Thon Mart. Cek hari untuk cabangmu di jadwal.",
+      countDone: "Acara sudah selesai. Terima kasih sudah merayakan Natal bersama I-Thon Mart.",
+      uD: "hari", uH: "jam", uM: "menit", uS: "detik",
+      jadwalH2: "Yuk, ketemu Santa di I-Thon!",
+      jadwalSub: function (j) { return "Pilih cabang terdekat, ajak si kecil, dan sampai jumpa di sana. Acara mulai " + j + " sampai selesai."; },
+      evSub: function (j) { return "Mulai " + j; },
+      rute: "Rute", kalender: "Kalender", kalenderAria: "Simpan ke kalender",
+      bDone: "Selesai", bLive: "Sedang berlangsung", bToday: "Hari ini", bNext: "Berikutnya",
+      calTitle: function (n) { return "Bertemu Santa di I-Thon Mart " + n; },
+      calDetails: function (n, j, url) { return "Ajak si kecil bertemu Santa di I-Thon Mart " + n + ". Mulai " + j + " sampai selesai." + (url ? " Info: " + url : ""); },
+      caraH2: "Cara ikut", caraSub: "Daftarnya langsung di kasir, saat kamu membeli hadiah.",
+      whoH3: "Siapa yang bisa ikut?",
+      hadiahH2: "Diserahkan langsung oleh Santa",
+      hadiahSub: "Setiap anak yang terdaftar menerima hadiahnya di hari acara, langsung dari tangan Santa.",
+      perkBig: "Diskon untuk pembelian hadiah mainan selama periode pendaftaran.",
+      perkWrapT: "Bungkus kado gratis", perkWrapP: "Hadiahmu dibungkus rapi di kasir.",
+      perkBonusT: "Ada hadiah tambahan", perkBonusP: "Dari I-Thon Mart untuk setiap peserta.",
+      snkH2: "Syarat & ketentuan",
+      kontakH2: "Ada pertanyaan?", kontakSub: "Tanyakan langsung ke tim marketing kami lewat WhatsApp.",
+      waT: "Chat WhatsApp", waS: "Tim marketing I-Thon Mart",
+      shareT: "Bagikan ke keluarga", shareS: "Kirim info acara ini",
+      shareText: function (r, j) { return "Bertemu Santa di I-Thon Mart, " + r + ", mulai " + j + ". Beli hadiah untuk si kecil, Santa yang menyerahkannya. Info:"; },
+      tJadwal: "Jadwal", tCara: "Cara ikut", tHadiah: "Hadiah", tSnk: "S&K",
+      waAria: "Chat WhatsApp", conj: "dan"
+    },
+    en: {
+      title: "Meet Santa · I-Thon Mart", h1: "Meet Santa",
+      lead: "Make Christmas merrier by buying a gift for your little one at I-Thon Mart. Leave it at the cashier, and Santa will hand it over on event day.",
+      santaAlt: "Santa waving and holding a gift", badgeAlt: "15% discount",
+      kAcara: "Event", kTempat: "Where", kDaftar: "Registration",
+      vAcara: function (r, j) { return r + ", from " + j; },
+      ctaJoin: "How to join", ctaSchedule: "See schedule",
+      regOpens: function (d) { return "Opens " + d; },
+      regLeft: function (n) { return "Closes in " + n + " days"; },
+      regTomorrow: "Closes tomorrow", regLast: "Last day", regClosed: "Closed",
+      countLabel: "Santa arrives at I-Thon Mart in",
+      countDuring: "Santa is visiting the I-Thon Mart stores. Check your store's day in the schedule.",
+      countDone: "The event has ended. Thank you for celebrating Christmas with I-Thon Mart.",
+      uD: "days", uH: "hrs", uM: "mins", uS: "secs",
+      jadwalH2: "Come meet Santa at I-Thon!",
+      jadwalSub: function (j) { return "Pick the store nearest you, bring your little one, and we'll see you there. Starts at " + j + " and runs until finished."; },
+      evSub: function (j) { return "Starts at " + j; },
+      rute: "Directions", kalender: "Calendar", kalenderAria: "Add to calendar",
+      bDone: "Done", bLive: "Happening now", bToday: "Today", bNext: "Up next",
+      calTitle: function (n) { return "Meet Santa at I-Thon Mart " + n; },
+      calDetails: function (n, j, url) { return "Bring your little one to meet Santa at I-Thon Mart " + n + ". Starts at " + j + "." + (url ? " Info: " + url : ""); },
+      caraH2: "How to join", caraSub: "You register at the cashier when you buy the gift.",
+      whoH3: "Who can join?",
+      hadiahH2: "Handed over by Santa himself",
+      hadiahSub: "Every registered child receives their gift on event day, straight from Santa.",
+      perkBig: "Off toy gifts during the registration period.",
+      perkWrapT: "Free gift wrapping", perkWrapP: "Your gift is wrapped neatly at the cashier.",
+      perkBonusT: "A bonus gift", perkBonusP: "From I-Thon Mart for every participant.",
+      snkH2: "Terms & conditions",
+      kontakH2: "Questions?", kontakSub: "Ask our marketing team directly on WhatsApp.",
+      waT: "Chat on WhatsApp", waS: "I-Thon Mart marketing team",
+      shareT: "Share with family", shareS: "Send them this event info",
+      shareText: function (r, j) { return "Meet Santa at I-Thon Mart, " + r + ", from " + j + ". Buy a gift for your little one and Santa hands it over. Info:"; },
+      tJadwal: "Schedule", tCara: "How to join", tHadiah: "Perks", tSnk: "Terms",
+      waAria: "Chat on WhatsApp", conj: "and"
+    }
+  };
+
+  function $(id) { return document.getElementById(id); }
+  function each(list, fn) { Array.prototype.forEach.call(list, fn); }
+  function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; }); }
+  function nb(s) {
+    return esc(s).replace(/I-Thon Mart/g, "\u0001")
+      .replace(/([0-9A-Za-z\u00C0-\u00FF]+(?:-[0-9A-Za-z\u00C0-\u00FF]+)+)/g, '<span class="nw">$1</span>')
+      .replace(/\u0001/g, '<span class="nw">I-Thon Mart</span>');
+  }
+  function pad(n) { return (n < 10 ? "0" : "") + n; }
+  function icon(id, cls) { return '<svg class="ic' + (cls ? " " + cls : "") + '"><use href="#' + id + '"/></svg>'; }
+
+  // ---- bahasa: ?lang=en > pilihan terakhir pengunjung > Indonesia ----
+  var lang = "id";
+  try { var simpan = localStorage.getItem("santa-lang"); if (simpan === "en" || simpan === "id") lang = simpan; } catch (e) {}
+  var qs = new URLSearchParams(location.search);
+  if (qs.get("lang") === "en" || qs.get("lang") === "id") lang = qs.get("lang");
+  function u(k) { return UI[lang][k]; }
+  function teks() { return E[lang] || E.id; }
+
+  // ---- waktu (WITA) ----
+  function wita(tgl, jam) {
+    var a = tgl.split("-").map(Number), b = (jam || "00:00").split(":").map(Number);
+    return Date.UTC(a[0], a[1] - 1, a[2], b[0], b[1] || 0) - OFF;
+  }
+  function bag(ms) { var t = new Date(ms + OFF); return { y: t.getUTCFullYear(), m: t.getUTCMonth(), d: t.getUTCDate(), w: t.getUTCDay() }; }
+  function hariKe(ms) { return Math.floor((ms + OFF) / D); }
+  function tgl(ms, tahun) { var p = bag(ms); return p.d + " " + NAMA[lang].bulan[p.m] + (tahun ? " " + p.y : ""); }
+  function hari(ms) { return NAMA[lang].hari[bag(ms).w]; }
+  function jam() {
+    var p = E.jamMulai.split(":"), h = +p[0], m = p[1] || "00";
+    return lang === "en" ? (h % 12 || 12) + ":" + m + " " + (h >= 12 ? "PM" : "AM") + " WITA" : pad(h) + "." + m + " WITA";
+  }
+
+  // Uji tampilan: ?now=2026-12-21T17:30 (jam WITA)
+  var t0 = Date.now(), base = null;
+  if (qs.get("now")) { var s = qs.get("now").split("T"); base = wita(s[0], s[1] || "00:00"); }
+  function now() { return base === null ? Date.now() : base + (Date.now() - t0); }
+
+  var buka = wita(E.daftarMulai, "00:00");
+  var tutup = wita(E.daftarSelesai, "23:59");
+  var acara = E.cabang.map(function (c) {
+    var mulai = wita(c.tanggal, E.jamMulai);
+    return { nama: c.nama, alamat: c.alamat, maps: c.maps, mulai: mulai, selesai: mulai + (E.durasiJam || 2) * H };
+  });
+  var urut = acara.slice().sort(function (a, b) { return a.mulai - b.mulai; });
+  var namaCabang = acara.map(function (a) { return a.nama; });
+
+  function periode() { return bag(buka).y === bag(tutup).y ? tgl(buka) + " – " + tgl(tutup, true) : tgl(buka, true) + " – " + tgl(tutup, true); }
+  function rentang() {
+    var a = urut[0].mulai, b = urut[urut.length - 1].mulai, f = bag(a), l = bag(b);
+    if (f.m === l.m && f.y === l.y) return (f.d === l.d ? f.d : f.d + "–" + l.d) + " " + NAMA[lang].bulan[f.m] + " " + f.y;
+    return tgl(a, true) + " – " + tgl(b, true);
+  }
+  function daftarCabang() {
+    return namaCabang.length > 1 ? namaCabang.slice(0, -1).join(", ") + ", " + u("conj") + " " + namaCabang[namaCabang.length - 1] : namaCabang[0];
+  }
+  function isi(s) { return nb(s).replace(/\{periode\}/g, periode()).replace(/\{cabang\}/g, esc(daftarCabang())).replace(/\{jam\}/g, jamNw()); }
+  function jamNw() { return '<span class="nw">' + esc(jam()) + "</span>"; }
+  function urlSitus() { return location.protocol.indexOf("http") === 0 ? location.origin + location.pathname : ""; }
+  function kalender(a) {
+    var fm = function (ms) { return new Date(ms).toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, ""); };
+    return "https://calendar.google.com/calendar/render?" + new URLSearchParams({
+      action: "TEMPLATE", text: u("calTitle")(a.nama), dates: fm(a.mulai) + "/" + fm(a.selesai),
+      details: u("calDetails")(a.nama, jam(), urlSitus()), location: "I-Thon Mart " + a.nama + ", " + a.alamat
+    }).toString();
+  }
+  function handle(url) { var m = String(url).match(/\/([^\/?#]+)\/?(?:[?#].*)?$/); return m ? "@" + m[1] : ""; }
+
+  // ---- render semua teks sesuai bahasa ----
+  function render() {
+    var T = teks();
+    document.documentElement.lang = lang;
+    document.title = u("title");
+    each(document.querySelectorAll("[data-i18n]"), function (el) {
+      var v = u(el.getAttribute("data-i18n")); if (typeof v === "string") el.innerHTML = nb(v);
+    });
+    $("santaImg").alt = u("santaAlt"); $("badgeImg").alt = u("badgeAlt");
+    $("fine").textContent = T.catatanDiskon || "";
+    $("vAcara").innerHTML = u("vAcara")(esc(rentang()), jamNw());
+    $("vTempat").innerHTML = nb("I-Thon Mart " + daftarCabang());
+    $("vDaftar").textContent = periode();
+    $("jadwalSub").innerHTML = u("jadwalSub")(jamNw());
+
+    $("events").innerHTML = acara.map(function (a, i) {
+      var p = bag(a.mulai);
+      return '<article class="ev" id="ev' + i + '">' +
+        '<div class="cal" aria-hidden="true"><span class="cal-mon">' + NAMA[lang].bulan[p.m] + '</span><span class="cal-num">' + p.d + '</span><span class="cal-day">' + NAMA[lang].hari[p.w] + "</span></div>" +
+        '<div><span class="badge" hidden></span>' +
+        '<h3><span class="nw">I-Thon Mart</span> ' + esc(a.nama) + "</h3>" +
+        '<p class="ev-sub"><span class="sr">' + esc(hari(a.mulai) + ", " + tgl(a.mulai, true)) + ". </span>" + u("evSub")(jamNw()) + "</p>" +
+        (a.alamat ? '<p class="ev-addr">' + esc(a.alamat) + "</p>" : "") +
+        "</div>" +
+        '<div class="ev-actions">' +
+        (a.maps ? '<a class="pill pill-sm" href="' + esc(a.maps) + '" target="_blank" rel="noopener">' + icon("i-nav") + esc(u("rute")) + "</a>" : "") +
+        '<a class="pill pill-sm" href="' + esc(kalender(a)) + '" target="_blank" rel="noopener" aria-label="' + esc(u("kalenderAria")) + '">' + icon("i-cal-plus") + esc(u("kalender")) + "</a>" +
+        "</div></article>";
+    }).join("");
+
+    $("steps").innerHTML = (T.caraIkut || []).map(function (s, i) {
+      return '<li class="step"><span class="num">' + (i + 1) + "</span><div><h3>" + isi(s.judul) + "</h3><p>" + isi(s.isi) + "</p></div></li>";
+    }).join("");
+    var who = T.syaratPeserta || [];
+    $("whoList").innerHTML = who.map(function (s) { return "<li>" + isi(s) + "</li>"; }).join("");
+    $("who").hidden = !who.length;
+
+    var snk = T.snk || [];
+    $("terms").innerHTML = snk.map(function (s, i) { return "<li" + (i === snk.length - 1 ? ' class="note"' : "") + ">" + isi(s) + "</li>"; }).join("");
+
+    var wa = "https://wa.me/" + String(E.whatsapp).replace(/\D/g, "") + "?text=" + encodeURIComponent(T.pesanWA || "");
+    var chev = icon("i-chev", "chev");
+    var rows = ['<a class="row" href="' + esc(wa) + '" target="_blank" rel="noopener"><span class="row-ic" data-logo="whatsapp" style="background:var(--pine)">' + icon("i-chat") + '</span><span><span class="row-t">' + esc(u("waT")) + '</span><span class="row-s">' + nb(u("waS")) + "</span></span>" + chev + "</a>"];
+    if (E.instagram) rows.push('<a class="row" href="' + esc(E.instagram) + '" target="_blank" rel="noopener"><span class="row-ic" data-logo="instagram" style="background:#b4235a">' + icon("i-camera") + '</span><span><span class="row-t">Instagram</span><span class="row-s">' + esc(handle(E.instagram)) + "</span></span>" + chev + "</a>");
+    if (E.facebook) rows.push('<a class="row" href="' + esc(E.facebook) + '" target="_blank" rel="noopener"><span class="row-ic" data-logo="facebook" style="background:#2f5da8">' + icon("i-users") + '</span><span><span class="row-t">Facebook</span><span class="row-s"><span class="nw">I-Thon Mart</span></span></span>' + chev + "</a>");
+    if (E.tiktok) rows.push('<a class="row" href="' + esc(E.tiktok) + '" target="_blank" rel="noopener"><span class="row-ic" data-logo="tiktok" style="background:#1c1c1e">' + icon("i-music") + '</span><span><span class="row-t">TikTok</span><span class="row-s">' + esc(handle(E.tiktok)) + "</span></span>" + chev + "</a>");
+    rows.push('<button class="row" type="button" id="shareBtn"><span class="row-ic" style="background:var(--cardinal)">' + icon("i-share") + '</span><span><span class="row-t">' + esc(u("shareT")) + '</span><span class="row-s">' + esc(u("shareS")) + "</span></span>" + chev + "</button>");
+    $("contact").innerHTML = rows.join("");
+    $("shareBtn").addEventListener("click", share);
+    pasangLogo();
+
+    $("tabWa").href = wa; $("tabWa").setAttribute("aria-label", u("waAria"));
+    var seg = $("seg"); seg.setAttribute("data-lang", lang);
+    each(seg.querySelectorAll("button"), function (b) { b.setAttribute("aria-pressed", b.getAttribute("data-lang") === lang ? "true" : "false"); });
+
+    update(true);
+    setTab(aktif);
+  }
+
+  function share() {
+    var url = urlSitus() || location.href;
+    var t = u("shareText")(rentang(), jam());
+    if (navigator.share) navigator.share({ title: document.title, text: t, url: url }).catch(function () {});
+    else window.open("https://wa.me/?text=" + encodeURIComponent(t + " " + url), "_blank", "noopener");
+  }
+
+  each(document.querySelectorAll("#seg button"), function (b) {
+    b.addEventListener("click", function () {
+      var l = b.getAttribute("data-lang"); if (l === lang) return;
+      lang = l; try { localStorage.setItem("santa-lang", lang); } catch (e) {}
+      render();
+    });
+  });
+
+  // ---- status otomatis ----
+  function setNum(id, v) {
+    var el = $(id); if (el.textContent === String(v)) return;
+    el.textContent = v;
+    if (id === "cdS" && !reduce && el.animate) el.animate([{ opacity: .3, transform: "translateY(-5px)" }, { opacity: 1, transform: "none" }], { duration: 280, easing: "ease-out" });
+  }
+  function update(force) {
+    var n = now(), st = $("regStatus"), c, muted = false;
+    if (n < buka) { c = u("regOpens")(hari(buka) + ", " + tgl(buka)); muted = true; }
+    else if (n <= tutup) {
+      var sisa = hariKe(tutup) - hariKe(n);
+      c = sisa <= 0 ? u("regLast") : sisa === 1 ? u("regTomorrow") : u("regLeft")(sisa);
+    } else { c = u("regClosed"); muted = true; }
+    st.textContent = c; st.className = "status" + (muted ? " muted" : "");
+
+    var first = urut[0], last = urut[urut.length - 1], label = $("countLabel"), cd = $("countdown");
+    if (n < first.mulai) {
+      label.innerHTML = nb(u("countLabel"));
+      var d = first.mulai - n;
+      setNum("cdD", Math.floor(d / D)); setNum("cdH", pad(Math.floor(d % D / H)));
+      setNum("cdM", pad(Math.floor(d % H / 6e4))); setNum("cdS", pad(Math.floor(d % 6e4 / 1e3)));
+      cd.hidden = false;
+    } else {
+      label.innerHTML = nb(n < last.selesai ? u("countDuring") : u("countDone"));
+      cd.hidden = true;
+    }
+
+    var next = null;
+    for (var i = 0; i < urut.length; i++) if (urut[i].mulai > n) { next = urut[i]; break; }
+    acara.forEach(function (a, i) {
+      var el = $("ev" + i); if (!el) return;
+      var b = el.querySelector(".badge"), k = "", t = "";
+      if (n >= a.selesai) { k = "done"; t = u("bDone"); }
+      else if (n >= a.mulai) { k = "live"; t = u("bLive"); }
+      else if (next && a.mulai === next.mulai) { var hi = hariKe(a.mulai) === hariKe(n); k = hi ? "today" : "next"; t = hi ? u("bToday") : u("bNext"); }
+      var cls = "ev" + (k ? " " + k : "");
+      if (force || el.className !== cls) {
+        el.className = cls;
+        b.innerHTML = (k === "live" ? '<span class="dot"></span>' : "") + esc(t);
+        b.hidden = !t;
+      }
+    });
+  }
+
+  // ---- tab bar: sorot bagian yang lagi dibaca ----
+  var aktif = "", thumb = $("tabThumb");
+  function setTab(id) {
+    aktif = id; var on = null;
+    each(document.querySelectorAll(".tab"), function (t) {
+      var a = t.getAttribute("data-sec") === id; t.classList.toggle("on", a);
+      if (a) { on = t; t.setAttribute("aria-current", "location"); } else t.removeAttribute("aria-current");
+    });
+    if (on) { thumb.style.width = on.offsetWidth + "px"; thumb.style.transform = "translateX(" + on.offsetLeft + "px)"; thumb.style.opacity = 1; }
+    else thumb.style.opacity = 0;
+  }
+  if ("IntersectionObserver" in window) {
+    var spy = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) setTab(e.target.getAttribute("data-spy") || ""); });
+    }, { rootMargin: "-45% 0px -50% 0px" });
+    each(document.querySelectorAll("[data-spy]"), function (el) { spy.observe(el); });
+
+    // fade in saat masuk layar, fade out saat keluar
+    var rv = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { e.target.classList.toggle("in", e.isIntersecting); });
+    }, { threshold: 0.12, rootMargin: "0px 0px -6% 0px" });
+    each(document.querySelectorAll(".rv, .rv-list"), function (el) { rv.observe(el); });
+  } else {
+    each(document.querySelectorAll(".rv, .rv-list"), function (el) { el.classList.add("in"); });
+  }
+  window.addEventListener("resize", function () { setTab(aktif); });
+
+  // ---- logo resmi medsos: dipakai kalau file-nya ada di img/ (atur di data.js) ----
+  var LOGO = {};
+  function pasangLogo() {
+    each(document.querySelectorAll("[data-logo]"), function (el) {
+      var src = LOGO[el.getAttribute("data-logo")];
+      if (!src || el.classList.contains("has-logo")) return;
+      el.classList.add("has-logo");
+      el.innerHTML = '<img src="' + esc(src) + '" alt="">';
+    });
+  }
+  each(["whatsapp", "instagram", "facebook", "tiktok"], function (k) {
+    var src = E.logo && E.logo[k];
+    if (!src || (k !== "whatsapp" && !E[k])) return;
+    var im = new Image();
+    im.onload = function () { LOGO[k] = src; pasangLogo(); };
+    im.src = src;
+  });
+
+  render();
+  setInterval(update, 1000);
+})();
+</script>
+</body>
+</html>
